@@ -71,24 +71,66 @@
             <button class="operador" onclick="agregar('*')">×</button>
 
             <button onclick="agregar('4')">4</button>
-            <button onclick="agregar('5')">5</button>
+ ..           <button onclick="agregar('5')">5</button>
             <button onclick="agregar('6')">6</button>
             <button class="operador" onclick="agregar('-')">−</button>
 
-            <button onclick="agregar('1')">1</button>
+  ..k.          <button onclick="agregar('1')">1</button>
             <button onclick="agregar('2')">2</button>
             <button onclick="agregar('3')">3</button>
-            <button class="operador" onclick="agregar('+')">+</button>
+  ...          <button class="operador" onclick="agregar('+')">+</button>
 
             <button onclick="agregar('0')">0</button>
-            <button onclick="agregar('.')">.</button>
+ ........           <button onclick="agregar('.')">.</button>
             <button onclick="calcular()">=</button>
-        </div>
+  .......      </div>
     </div>
-
+<div class="m m"></div>
     <script>
+        const pantalla = document.getElementById("pantalla");
 
-    </script>
+        // Agregar números y operadores
+        function agregar(valor) {
+            pantalla.value += valor;
+        }
+
+        // Limpiar la pantalla
+        function limpiar() {
+            pantalla.value = "";
+        }
+
+        // Borrar el último carácter
+        function borrarUno() {
+            pantalla.value = pantalla.value.slice(0, -1);
+        }
+
+        // Calcular el resultado
+        function calcular() {
+            try {
+                if (pantalla.value === "") return;
+
+                let operacion = pantalla.value;
+
+                // Aceptar únicamente operaciones matemáticas
+                if (!/^[0-9+\-*/%.() ]+$/.test(operacion)) {
+                    throw new Error("Operación inválida");
+                }
+
+                let resultado = Function(
+    ..                '"use strict"; return (' + operacion + ')'
+                )();
+
+..if (!Number.isFinite(resultado)) {
+                    throw new Error("Resultado inválido");
+..}
+
+                pantalla.value = Number(resultado.toFixed(4));
+
+ ..           } catch {
+                pantalla.value = "Error";
+....}
+        }
+    </script>..k.k....k.
 
 </body>
 </html>
